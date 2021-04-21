@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware([Admin::class])->group(function(){
     Route::get('/',[AdminController::class,'index'])->name('admin');
     Route::resource('pacientes', PacienteController::class);
     Route::resource('medicos', MedicoController::class);

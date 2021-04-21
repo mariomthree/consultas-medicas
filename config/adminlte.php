@@ -293,6 +293,10 @@ return [
                 [
                     'text' => 'Adicionar Novo',
                     'url'  => 'admin/usuarios/create'
+                ],
+                [
+                    'text' => 'Funções',
+                    'url'  => 'laratrust/'
                 ]
             ],
             'permission'  => [
