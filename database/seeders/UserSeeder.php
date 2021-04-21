@@ -26,5 +26,7 @@ class UserSeeder extends Seeder
         );
         $admin = Role::where('name','administrador')->first();
         $user->attachRole($admin);
+
+        
     }
 }

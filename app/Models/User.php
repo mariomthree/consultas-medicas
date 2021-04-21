@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_active',
+        'description',
         'role_id'
     ];
 
@@ -44,5 +46,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function adminlte_image()
+    {
+        return '/vendor/adminlte/dist/img/user.png';
+    }
+
+    public function adminlte_desc()
+    {
+        return $this->description;
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'admin/usuarios/'.Auth::user()->id.'/edit';
+    }
     
 }

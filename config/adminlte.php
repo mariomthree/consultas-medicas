@@ -1,5 +1,7 @@
 <?php
 
+use PHPUnit\Framework\Constraint\IsTrue;
+
 return [
 
     /*
@@ -65,11 +67,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
+    'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -193,7 +195,7 @@ return [
     'register_url' => 'register',
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
-    'profile_url' => false,
+    'profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -231,11 +233,6 @@ return [
             'topnav' => true,
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text'        => 'Inicio',
             'url'         => 'admin',
             'icon'        => 'fas fa-fw fa-tachometer-alt',
@@ -247,11 +244,19 @@ return [
             'submenu'   => [
                 [
                     'text' => 'Todos Pacientes',
-                    'url'  => 'admin/pacientes'
+                    'url'  => 'admin/pacientes',
+                    'permission'  => [
+                        'pacientes-listar',
+                        'pacientes-editar',
+                        'pacientes-remover',
+                    ]
                 ],
                 [
                     'text' => 'Adicionar Novo',
-                    'url'  => 'admin/pacientes/create'
+                    'url'  => 'admin/pacientes/create',
+                    'permission'  => [
+                        'pacientes-criar',
+                    ]
                 ]
             ]
         ],
@@ -261,11 +266,19 @@ return [
             'submenu'   => [
                 [
                     'text' => 'Todos Medicos',
-                    'url'  => 'admin/medicos'
+                    'url'  => 'admin/medicos',
+                    'permission'  => [
+                        'medicos-listar',
+                        'medicos-editar',
+                        'medicos-remover',
+                    ]
                 ],
                 [
                     'text' => 'Adicionar Novo',
-                    'url'  => 'admin/medicos/create'
+                    'url'  => 'admin/medicos/create',
+                    'permission'  => [
+                        'medicos-criar',
+                    ]
                 ]
             ]
         ],
@@ -281,6 +294,12 @@ return [
                     'text' => 'Adicionar Novo',
                     'url'  => 'admin/usuarios/create'
                 ]
+            ],
+            'permission'  => [
+                'usuarios-criar',
+                'usuarios-listar',
+                'usuarios-remover',
+                'usuarios-editar'
             ]
         ]
     
@@ -299,13 +318,14 @@ return [
     */
 
     'filters' => [
-        JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+        #JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
+        \App\Laratrust\MenuFilter::class,
     ],
 
     /*
