@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PacienteRequest;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PacienteController extends Controller
 {
@@ -40,7 +41,10 @@ class PacienteController extends Controller
     public function store(PacienteRequest $request)
     {
         Paciente::create($request->all());
-        return redirect('/admin/pacientes')->with('success','Paciente adicionado.');
+        if(Auth::user()->hasRole(['administrator','chefePosto']))
+            return redirect('/admin/pacientes')->with('success','Paciente adicionado.');
+        else
+            return redirect('/admin/pacientes/create')->with('success','Paciente adicionado.');
     }
 
     /**

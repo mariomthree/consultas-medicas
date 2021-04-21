@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MedicoRequest;
 use App\Models\Medico;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MedicoController extends Controller
 {
@@ -40,7 +41,10 @@ class MedicoController extends Controller
     public function store(MedicoRequest $request)
     {
         Medico::create($request->all());
-        return redirect('/admin/medicos')->with('success','Medico adicionado.');
+        if(Auth::user()->hasRole(['administrator','chefePosto']))
+            return redirect('/admin/medicos')->with('success','Medico adicionado.');
+        else
+            return redirect('/admin/medicos/create')->with('success','Medico adicionado.');
     }
 
     /**
