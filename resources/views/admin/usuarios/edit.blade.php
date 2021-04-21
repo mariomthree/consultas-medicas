@@ -67,11 +67,11 @@
 									@endif
 								</div>
 							</div>
-
-							<div class="form-group row d-none">
+							@role('administrador')
+							<div class="form-group row">
 								{!! Form::label('is_active','Estado:',['class'=>'col-sm-3 col-form-label']) !!}
 								<div class="col-sm-9">
-									{!! Form::select('is_active',array(0=>'Inactivo',1=>'Activo'),null,['class'=>'form-control custom-select']) !!}
+									{!! Form::select('is_active',array(0=>'Inactivo',1=>'Activo'),1,['class'=>'form-control custom-select']) !!}
 									@if($errors->has('is_active'))
 										<div class="invalid-feedback">
 											<strong>{{ $errors->first('is_active') }}</strong>
@@ -90,6 +90,7 @@
 									@endif
 								</div>
 							</div>
+							@endrole
 							<div class="form-group row">
 								{!! Form::label('description','Descrição:',['class'=>'col-sm-3 col-form-label']) !!}
 								<div class="col-sm-9">

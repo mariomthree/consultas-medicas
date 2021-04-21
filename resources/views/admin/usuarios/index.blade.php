@@ -46,7 +46,7 @@
 								<th>#</th>
 								<th>Nome</th>
 								<th>Email</th>
-								<th class="d-none">Estado</th>
+								<th>Estado</th>
 								<th>Função</th>
 								<th>Acção</th>
 							</tr>
@@ -58,7 +58,7 @@
 										<td>{{$usuario->id}}</td>
 										<td>{{$usuario->name}}</td>
 										<td>{{$usuario->email}}</td>
-										<td class="d-none">{{$usuario->is_active == 1 ? 'Activo' : 'Inactivo'}}</td>
+										<td>{{$usuario->is_active == 1 ? 'Activo' : 'Inactivo'}}</td>
 										<td>{{$usuario->roles->first()['display_name']}}</td>
 										<td class="text-left py-0 align-middle">
 											{!! Form::open(['method'=>'DELETE','action'=>['App\Http\Controllers\UsuarioController@destroy',$usuario->id]]) !!}
