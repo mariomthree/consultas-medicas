@@ -239,6 +239,20 @@ return [
             'classes'     => 'mt-2'
         ],
         [
+            'text'      => 'Consultas',
+            'icon'      => 'fas fa-fw fa-list',
+            'submenu'   => [
+                [
+                    'text' => 'Todos Consultas',
+                    'url'  => 'admin/consultas'
+                ],
+                [
+                    'text' => 'Adicionar Novo',
+                    'url'  => 'admin/consultas/create'
+                ]
+            ]
+        ],
+        [
             'text'      => 'Pacientes',
             'icon'      => 'fas fa-fw fa-head-side-mask',
             'submenu'   => [

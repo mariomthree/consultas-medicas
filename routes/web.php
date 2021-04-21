@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ConsultaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
@@ -30,4 +31,5 @@ Route::prefix('admin')->middleware([Admin::class])->group(function(){
     Route::resource('pacientes', PacienteController::class);
     Route::resource('medicos', MedicoController::class);
     Route::resource('usuarios', UsuarioController::class);
+    Route::resource('consultas', ConsultaController::class);
 });

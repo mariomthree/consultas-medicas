@@ -61,5 +61,6 @@ class User extends Authenticatable
     {
         return 'admin/usuarios/'.Auth::user()->id.'/edit';
     }
-    
+
+
 }
