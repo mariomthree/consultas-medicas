@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,7 +39,7 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {  
         $data = $request->except('role_id');
         $data['password'] = bcrypt($request->password);   
@@ -72,25 +74,23 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $usuario = User::findOrFail($id);
 
-        $data = $request->except('role_id');
         if (trim($request->password) == '') {
-            $data = $request->except('password');
+            $data = $request->except(['password','role_id']);
         }else{
-            $data = $request->all();
+            $data = $request->except(['role_id']);
             $data['password'] = bcrypt($request->password);   
         }
 
         $usuario->update($data);
         
-        if (Auth::user()->hasRole('administrator')) {
-            $role = Role::findOrFail($request->role_id);
-            $usuario->detachRoles($usuario->roles);
-            $usuario->attachRole($role);
-        }
+        $role = Role::findOrFail($request->role_id);
+        $usuario->detachRoles($usuario->roles);
+        $usuario->attachRole($role);
+
 
         return redirect('admin/usuarios')->with('success','Utilizador actualizado.');
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PacienteRequest;
 use App\Models\Paciente;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class PacienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PacienteRequest $request)
     {
         Paciente::create($request->all());
         return redirect('/admin/pacientes')->with('success','Paciente adicionado.');
@@ -63,7 +64,7 @@ class PacienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PacienteRequest $request, $id)
     {
         $paciente = Paciente::findOrFail($id);
         $paciente->update($request->all());

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MedicoRequest;
 use App\Models\Medico;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class MedicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MedicoRequest $request)
     {
         Medico::create($request->all());
         return redirect('/admin/medicos')->with('success','Medico adicionado.');
@@ -63,7 +64,7 @@ class MedicoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MedicoRequest $request, $id)
     {
         $medico = Medico::findOrFail($id);
         $medico->update($request->all());
