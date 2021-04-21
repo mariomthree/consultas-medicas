@@ -16,10 +16,12 @@ return [
             'usuarios' => 'c,l,e,r',
             'pacientes' => 'c,l,e,r',
             'medicos' => 'c,l,e,r',
+            'consultas' => 'c,r,l,r',
         ],
         'chefe_posto' => [
             'pacientes' => 'r,l,r',
             'medicos' => 'r,l,r',
+            'consultas' => 'c,r,l,r',
         ],
         'recepcionista' => [
             'pacientes' => 'c',

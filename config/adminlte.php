@@ -250,6 +250,12 @@ return [
                     'text' => 'Adicionar Novo',
                     'url'  => 'admin/consultas/create'
                 ]
+            ],
+            'permission'  => [
+                'consultas-criar',
+                'consultas-listar',
+                'consultas-remover',
+                'consultas-editar'
             ]
         ],
         [
