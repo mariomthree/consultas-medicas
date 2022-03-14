@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\MatchOldPassword;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest
+class PerfilPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +25,9 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'nullable|max:8|min:8',
-            'is_active' => 'required',
-            'role_id' => 'required'
+            'current_password' => ['required', new MatchOldPassword],
+            'password' => 'required',
+            'confirm' => 'required|same:password',
         ];
     }
 }

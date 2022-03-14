@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function adminlte_profile_url()
     {
-        return 'admin/usuarios/'.Auth::user()->id.'/edit';
+        return route('perfil');
     }
 
 

@@ -28,6 +28,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('admin')->middleware([Admin::class])->group(function(){
     Route::get('/',[AdminController::class,'index'])->name('admin');
+    Route::get('/perfil',[UsuarioController::class,'perfil'])->name('perfil');
+    Route::patch('/perfil/update-information',[UsuarioController::class,'updateInformation'])->name('perfil.update.information');
+    Route::patch('/perfil/update-password',[UsuarioController::class,'updatePassword'])->name('perfil.update.password');
     Route::resource('pacientes', PacienteController::class);
     Route::resource('medicos', MedicoController::class);
     Route::resource('usuarios', UsuarioController::class);

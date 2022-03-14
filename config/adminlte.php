@@ -18,7 +18,7 @@ return [
 
     'title' => 'Posto Medico',
     'title_prefix' => '',
-    'title_postfix' => '',
+    'title_postfix' => ' | Posto Medico',
 
     /*
     |--------------------------------------------------------------------------
@@ -230,7 +230,7 @@ return [
         [
             'text' => 'search',
             'search' => true,
-            'topnav' => true,
+            'topnav' => false,
         ],
         [
             'text'        => 'Inicio',
@@ -238,6 +238,7 @@ return [
             'icon'        => 'fas fa-fw fa-tachometer-alt',
             'classes'     => 'mt-2'
         ],
+        ['header' => 'Operações'],
         [
             'text'      => 'Consultas',
             'icon'      => 'fas fa-fw fa-list',
@@ -302,13 +303,19 @@ return [
                 ]
             ]
         ],
+        ['header' => 'Configurações da Conta'],
+        [
+            'text'      => 'Meu Perfil',
+            'icon'      => 'fas fa-fw fa-user',
+            'url'       => 'admin/perfil',
+        ],
         [
             'text'      => 'Usuarios',
             'icon'      => 'fas fa-fw fa-users',
             'submenu'   => [
                 [
                     'text' => 'Visualizar',
-                    'url'  => 'admin/usuarios'
+
                 ],
                 [
                     'text' => 'Criar',
@@ -325,8 +332,7 @@ return [
                 'usuarios-remover',
                 'usuarios-editar'
             ]
-        ]
-
+        ],
     ],
 
     /*
