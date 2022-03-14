@@ -299,7 +299,7 @@ return [
         | These middleware will get attached onto each Laratrust panel route.
         |
         */
-        'middleware' => ['web'],
+        'middleware' => ['web', 'auth'],
 
         /*
         |--------------------------------------------------------------------------
@@ -325,10 +325,10 @@ return [
             'not_removable' => [],
 
             // The user won't be able to edit the role and the permissions assigned.
-            'not_editable' => [],
+            'not_editable' => ['administrador'],
 
             // The user won't be able to delete the role.
-            'not_deletable' => [],
+            'not_deletable' => ['administrador', 'chefe_posto', 'recepcionista'],
         ],
     ]
 ];

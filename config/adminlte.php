@@ -243,11 +243,11 @@ return [
             'icon'      => 'fas fa-fw fa-list',
             'submenu'   => [
                 [
-                    'text' => 'Todos Consultas',
+                    'text' => 'Visualizar',
                     'url'  => 'admin/consultas'
                 ],
                 [
-                    'text' => 'Adicionar Novo',
+                    'text' => 'Criar',
                     'url'  => 'admin/consultas/create'
                 ]
             ],
@@ -263,7 +263,7 @@ return [
             'icon'      => 'fas fa-fw fa-head-side-mask',
             'submenu'   => [
                 [
-                    'text' => 'Todos Pacientes',
+                    'text' => 'Visualizar',
                     'url'  => 'admin/pacientes',
                     'permission'  => [
                         'pacientes-listar',
@@ -272,7 +272,7 @@ return [
                     ]
                 ],
                 [
-                    'text' => 'Adicionar Novo',
+                    'text' => 'Criar',
                     'url'  => 'admin/pacientes/create',
                     'permission'  => [
                         'pacientes-criar',
@@ -285,7 +285,7 @@ return [
             'icon'      => 'fas fa-fw fa-user-md',
             'submenu'   => [
                 [
-                    'text' => 'Todos Medicos',
+                    'text' => 'Visualizar',
                     'url'  => 'admin/medicos',
                     'permission'  => [
                         'medicos-listar',
@@ -294,7 +294,7 @@ return [
                     ]
                 ],
                 [
-                    'text' => 'Adicionar Novo',
+                    'text' => 'Criar',
                     'url'  => 'admin/medicos/create',
                     'permission'  => [
                         'medicos-criar',
@@ -307,15 +307,15 @@ return [
             'icon'      => 'fas fa-fw fa-users',
             'submenu'   => [
                 [
-                    'text' => 'Todos Usuarios',
+                    'text' => 'Visualizar',
                     'url'  => 'admin/usuarios'
                 ],
                 [
-                    'text' => 'Adicionar Novo',
+                    'text' => 'Criar',
                     'url'  => 'admin/usuarios/create'
                 ],
                 [
-                    'text' => 'Funções',
+                    'text' => 'Funções e Permissões',
                     'url'  => 'laratrust/'
                 ]
             ],
@@ -326,7 +326,7 @@ return [
                 'usuarios-editar'
             ]
         ]
-    
+
     ],
 
     /*

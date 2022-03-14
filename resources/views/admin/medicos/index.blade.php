@@ -4,18 +4,12 @@
 <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.css') }}">
 @stop
 
-@section('title')
+@section('title', 'Visualizar Medicos')
 
 @section('content_header')
 <div class="row mb-2">
     <div class="col-sm-6">
-        <h1 class="m-0 text-dark">Medicos</h1>
-    </div><!-- /.col -->
-    <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
-        <li class="breadcrumb-item active">Medicos</li>
-        </ol>
+        <h1 class="m-0 text-dark">Visualizar Medicos</h1>
     </div><!-- /.col -->
 </div><!-- /.row -->
 @stop
@@ -37,7 +31,7 @@
 			<div class="col-sm-12 col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">Todos Medicos</h3>
+						<h3 class="card-title">Medicos</h3>
 					</div>
 					<div class="card-body  table-responsive">
 					<table id="table" class="table table-striped">
