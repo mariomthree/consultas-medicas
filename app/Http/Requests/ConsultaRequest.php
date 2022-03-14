@@ -24,8 +24,8 @@ class ConsultaRequest extends FormRequest
     public function rules()
     {
         return [
-            'paciente_id' => 'required',
-            'medico_id' => 'required',
+            'paciente_id' => 'required|exists:pacientes,id',
+            'medico_id' => 'required|exists:medicos,id',
             'dataMarcacao' => 'required'
         ];
     }

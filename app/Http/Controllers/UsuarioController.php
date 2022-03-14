@@ -15,23 +15,27 @@ class UsuarioController extends Controller
 
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::orderBy('created_at', 'desc')->get();
         return view('admin.usuarios.index', ['usuarios' => $usuarios]);
     }
 
     public function create()
     {
         $roles = Role::pluck('name', 'id');
+
         return view('admin.usuarios.create', ['roles' => $roles]);
     }
 
     public function store(UserCreateRequest $request)
     {
-        $data = $request->except('role_id');
-        $data['password'] = bcrypt($request->password);
-        $usuario = User::create($data);
+        $usuario = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'description' => $request->description,
+        ]);
         $role = Role::findOrFail($request->role_id);
-        $usuario->attachRole($role);
+        $usuario->sync($role);
 
         return redirect('admin/usuarios')->with('success', 'Utilizador adicionado.');
     }
@@ -50,19 +54,18 @@ class UsuarioController extends Controller
     public function update(UserUpdateRequest $request, $id)
     {
         $usuario = User::findOrFail($id);
+        $password = $request->password ? Hash::make($request->password) : $usuario->password;
 
-        if (trim($request->password) == '') {
-            $data = $request->except(['password', 'role_id']);
-        } else {
-            $data = $request->except(['role_id']);
-            $data['password'] = bcrypt($request->password);
-        }
-
-        $usuario->update($data);
+        $usuario->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $password,
+            'description' => $request->description,
+        ]);
 
         $role = Role::findOrFail($request->role_id);
-        $usuario->detachRoles($usuario->roles);
-        $usuario->attachRole($role);
+        $usuario->sync($role);
+
         return redirect('admin/usuarios')->with('success', 'Utilizador actualizado.');
     }
 
@@ -70,6 +73,7 @@ class UsuarioController extends Controller
     {
         $usuario = User::findOrFail($id);
         $usuario->delete();
+
         return redirect('admin/usuarios')->with('success', 'Utilizador removido.');
     }
 
@@ -87,6 +91,7 @@ class UsuarioController extends Controller
             'email' => $request->email,
             'description' => $request->description
         ]);
+
         return redirect()->route('perfil')->with('success', 'Perfil actualizado.');
     }
 
@@ -94,6 +99,7 @@ class UsuarioController extends Controller
     {
         $usuario = auth()->user();
         $usuario->update(['password' => Hash::make($request->password)]);
+
         return redirect()->route('perfil')->with('success', 'Senha actualizada.');
     }
 }

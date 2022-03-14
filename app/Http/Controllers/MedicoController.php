@@ -4,87 +4,60 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MedicoRequest;
 use App\Models\Medico;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class MedicoController extends Controller
 {
-     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $medicos = Medico::all();
-        return view('admin.medicos.index',[
-            'medicos' => $medicos
-        ]);
+        $medicos = Medico::orderBy('created_at', 'desc')->get();
+        return view('admin.medicos.index', ['medicos' => $medicos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.medicos.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(MedicoRequest $request)
     {
-        Medico::create($request->all());
-        if(Auth::user()->hasRole(['administrator','chefePosto']))
-            return redirect('/admin/medicos')->with('success','Medico adicionado.');
-        else
-            return redirect('/admin/medicos/create')->with('success','Medico adicionado.');
+        $dataNascimento = Carbon::parse($request->dataNascimento)->format('Y-m-d');
+        Medico::create([
+            'nome' => $request->nome,
+            'apelido' => $request->apelido,
+            'dataNascimento' => $dataNascimento,
+            'especialidade' => $request->especialidade,
+            'postoMedico' => $request->postoMedico,
+        ]);
+
+        return redirect()->route('medicos.index')->with('success', 'Medico adicionado.');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $medico = Medico::findOrFail($id);
-        return view('admin.medicos.edit',[
-            'medico'=>$medico
-        ]);
+        return view('admin.medicos.edit', ['medico' => $medico]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(MedicoRequest $request, $id)
     {
         $medico = Medico::findOrFail($id);
-        $medico->update($request->all());
-        return redirect('/admin/medicos')->with('success','Medico actualizado.');
+        $dataNascimento = Carbon::parse($request->dataNascimento)->format('Y-m-d');
+        $medico->update([
+            'nome' => $request->nome,
+            'apelido' => $request->apelido,
+            'dataNascimento' => $dataNascimento,
+            'especialidade' => $request->especialidade,
+            'postoMedico' => $request->postoMedico,
+        ]);
+
+        return redirect()->route('medicos.index')->with('success', 'Medico actualizado.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $medico = Medico::findOrFail($id);
         $medico->delete();
-        return redirect('/admin/medicos')->with('success','Medico removido.');
+        return redirect()->route('medicos.index')->with('success', 'Medico removido.');
     }
 }
