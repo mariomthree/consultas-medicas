@@ -1,7 +1,5 @@
 <?php
 
-use PHPUnit\Framework\Constraint\IsTrue;
-
 return [
 
     /*
@@ -192,7 +190,7 @@ return [
     'dashboard_url' => 'home',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
+    'register_url' => null,
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => true,
@@ -245,19 +243,16 @@ return [
             'submenu'   => [
                 [
                     'text' => 'Visualizar',
-                    'url'  => 'admin/consultas'
+                    'url'  => 'admin/consultas',
+                    'can'  => ['consultas-listar', 'consultas-editar', 'consultas-remover']
                 ],
                 [
                     'text' => 'Criar',
-                    'url'  => 'admin/consultas/create'
+                    'url'  => 'admin/consultas/create',
+                    'can'  => ['consultas-criar']
                 ]
             ],
-            'permission'  => [
-                'consultas-criar',
-                'consultas-listar',
-                'consultas-remover',
-                'consultas-editar'
-            ]
+
         ],
         [
             'text'      => 'Pacientes',
@@ -266,18 +261,12 @@ return [
                 [
                     'text' => 'Visualizar',
                     'url'  => 'admin/pacientes',
-                    'permission'  => [
-                        'pacientes-listar',
-                        'pacientes-editar',
-                        'pacientes-remover',
-                    ]
+                    'can'  => ['pacientes-listar', 'pacientes-editar', 'pacientes-remover']
                 ],
                 [
                     'text' => 'Criar',
                     'url'  => 'admin/pacientes/create',
-                    'permission'  => [
-                        'pacientes-criar',
-                    ]
+                    'can'  => ['pacientes-criar']
                 ]
             ]
         ],
@@ -288,18 +277,12 @@ return [
                 [
                     'text' => 'Visualizar',
                     'url'  => 'admin/medicos',
-                    'permission'  => [
-                        'medicos-listar',
-                        'medicos-editar',
-                        'medicos-remover',
-                    ]
+                    'can'  => ['medicos-listar', 'medicos-editar', 'medicos-remover']
                 ],
                 [
                     'text' => 'Criar',
                     'url'  => 'admin/medicos/create',
-                    'permission'  => [
-                        'medicos-criar',
-                    ]
+                    'can'  => ['medicos-criar']
                 ]
             ]
         ],
@@ -308,29 +291,27 @@ return [
             'text'      => 'Meu Perfil',
             'icon'      => 'fas fa-fw fa-user',
             'url'       => 'admin/perfil',
+            'can'       => 'perfil-editar'
         ],
         [
-            'text'      => 'Usuarios',
+            'text'      => 'Usuários',
             'icon'      => 'fas fa-fw fa-users',
             'submenu'   => [
                 [
                     'text' => 'Visualizar',
-
+                    'url'  => 'admin/usuarios',
+                    'can'  => ['usuarios-listar', 'usuarios-editar', 'usuarios-remover']
                 ],
                 [
                     'text' => 'Criar',
-                    'url'  => 'admin/usuarios/create'
+                    'url'  => 'admin/usuarios/create',
+                    'can'  => ['usuarios-criar']
                 ],
                 [
                     'text' => 'Funções e Permissões',
-                    'url'  => 'laratrust/'
+                    'url'  => 'laratrust/',
+                    'can'  => ['laratrust-listar', 'laratrust-editar', 'laratrust-remover',  'laratrust-criar']
                 ]
-            ],
-            'permission'  => [
-                'usuarios-criar',
-                'usuarios-listar',
-                'usuarios-remover',
-                'usuarios-editar'
             ]
         ],
     ],
@@ -348,14 +329,13 @@ return [
     */
 
     'filters' => [
-        #JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+        JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
-        \App\Laratrust\MenuFilter::class,
     ],
 
     /*

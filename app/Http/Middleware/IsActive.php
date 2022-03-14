@@ -6,7 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Admin
+
+class IsActive
 {
     /**
      * Handle an incoming request.
@@ -17,8 +18,10 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check())
-            return $next($request);
-        return redirect('login');
+        if (auth()->check() && auth()->user()->is_active == 0) {
+            abort(403, 'Your account is not active. Please contact the administrator.');
+            auth()->logout();
+        }
+        return $next($request);
     }
 }

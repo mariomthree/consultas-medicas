@@ -49,7 +49,7 @@ class User extends Authenticatable
 
     public function adminlte_image()
     {
-        return '/vendor/adminlte/dist/img/user.png';
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name);
     }
 
     public function adminlte_desc()
