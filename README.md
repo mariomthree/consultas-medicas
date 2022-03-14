@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="./equipe-medica.png" width="400"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="./equipe-medica.png" width="300"></a></p>
 
 ## Consultas Médicas
 
